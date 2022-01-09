@@ -1,5 +1,6 @@
 package com.sbrf.reboot.repository;
 
+import com.sbrf.reboot.repository.impl.AccountRepositoryException;
 import com.sbrf.reboot.repository.impl.FileAccountRepository;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,8 @@ class FileAccountRepositoryTest {
     AccountRepository accountRepository;
 
     @Test
-    void onlyPersonalAccounts() throws IOException {
+    // Пришлось добавить в сигнатуру этого теста мое исключение (чтобы не возвращать null а выбрасывать его)
+    void onlyPersonalAccounts() throws IOException, AccountRepositoryException {
         String filePath = "src/main/resources/Accounts.txt";
         accountRepository = new FileAccountRepository(filePath);
 

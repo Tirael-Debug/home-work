@@ -17,7 +17,7 @@ public class FileAccountRepository implements AccountRepository {
     private static final String NUMBER = "\"number\": ";
 
     @Override
-    public Set<Long> getAllAccountsByClientId(long clientId) throws FileNotFoundException {
+    public Set<Long> getAllAccountsByClientId(long clientId) throws IOException, AccountRepositoryException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
         String line;
         long client = 0L;
@@ -33,9 +33,14 @@ public class FileAccountRepository implements AccountRepository {
                 }
             }
         } catch (IOException ex) {
-            return null;
+            throw new AccountRepositoryException("Load accounts error!", ex);
+        } finally {
+            reader.close();
         }
-
-        return accounts.size() > 0 ? accounts : null;
+        if (accounts.size() > 0) {
+            return accounts;
+        } else {
+            throw new AccountRepositoryException("Empty accounts data!");
+        }
     }
 }
