@@ -1,5 +1,6 @@
 package com.sbrf.reboot.service;
 
+import com.sbrf.reboot.exception.AccountException;
 import com.sbrf.reboot.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,10 +17,10 @@ public class AccountService {
         return repository.getContactByClientId(clientId) == contractNumber;
     }
 
-    public BigDecimal getClientAccountBalance(long clientId, long accountNumber) {
+    public BigDecimal getClientAccountBalance(long clientId, long accountNumber) throws AccountException {
         if (repository.getAllAccountsByClientId(clientId).contains(accountNumber)) {
             return repository.getAccountBalance(accountNumber);
         }
-        return null;
+        throw new AccountException("Unable to get account balance!");
     }
 }

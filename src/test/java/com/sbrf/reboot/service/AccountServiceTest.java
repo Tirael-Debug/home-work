@@ -1,8 +1,10 @@
 package com.sbrf.reboot.service;
 
+import com.sbrf.reboot.exception.AccountException;
 import com.sbrf.reboot.repository.AccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
@@ -58,7 +60,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void accountBalanceTestSuccess() {
+    void accountBalanceTestSuccess() throws AccountException {
         long clientId = 1L;
         long accountNumber = 111L;
         BigDecimal accountBalance = new BigDecimal("1000.00");
@@ -78,14 +80,11 @@ class AccountServiceTest {
         long clientId = 1L;
         long accountNumber = 111L;
 
-        Set<Long> accounts = new HashSet();
-        accounts.add(accountNumber);
-
-        when(accountRepository.getAllAccountsByClientId(clientId)).thenReturn(accounts);
+        when(accountRepository.getAllAccountsByClientId(clientId)).thenReturn(new HashSet<>());
 
         when(accountRepository.getAccountBalance(accountNumber)).thenReturn(null);
 
-        assertNull(accountService.getClientAccountBalance(clientId, accountNumber));
+        assertThrows(AccountException.class, () -> accountService.getClientAccountBalance(clientId, accountNumber));
     }
 
     @Test
