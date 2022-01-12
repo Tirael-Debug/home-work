@@ -4,6 +4,7 @@ import com.sbrf.reboot.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,5 +43,16 @@ public class FileAccountRepository implements AccountRepository {
         } else {
             throw new AccountRepositoryException("Empty accounts data!");
         }
+    }
+
+    //TODO реализация, чтобы на данный момент разрешить конфликт с ДЗ 3
+    @Override
+    public long getContactByClientId(long clientId) {
+        return 0;
+    }
+
+    @Override
+    public BigDecimal getAccountBalance(long accountId) {
+        return null;
     }
 }
