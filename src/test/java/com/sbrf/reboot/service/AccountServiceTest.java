@@ -2,12 +2,14 @@ package com.sbrf.reboot.service;
 
 import com.sbrf.reboot.exception.AccountException;
 import com.sbrf.reboot.repository.AccountRepository;
+import com.sbrf.reboot.repository.impl.AccountRepositoryException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +32,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void contractExist() {
+    void contractExist() throws IOException, AccountRepositoryException {
         Set<Long> accounts = new HashSet();
         accounts.add(111L);
 
@@ -45,7 +47,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void contractNotExist() {
+    void contractNotExist() throws IOException, AccountRepositoryException {
         Set<Long> accounts = new HashSet();
         accounts.add(222L);
 
@@ -60,7 +62,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void accountBalanceTestSuccess() throws AccountException {
+    void accountBalanceTestSuccess() throws AccountException, IOException, AccountRepositoryException {
         long clientId = 1L;
         long accountNumber = 111L;
         BigDecimal accountBalance = new BigDecimal("1000.00");
@@ -76,7 +78,7 @@ class AccountServiceTest {
     }
 
     @Test
-    void accountBalanceTestFails() {
+    void accountBalanceTestFails() throws IOException, AccountRepositoryException {
         long clientId = 1L;
         long accountNumber = 111L;
 

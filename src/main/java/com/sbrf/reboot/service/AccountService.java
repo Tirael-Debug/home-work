@@ -2,9 +2,11 @@ package com.sbrf.reboot.service;
 
 import com.sbrf.reboot.exception.AccountException;
 import com.sbrf.reboot.repository.AccountRepository;
+import com.sbrf.reboot.repository.impl.AccountRepositoryException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class AccountService {
         return repository.getContactByClientId(clientId) == contractNumber;
     }
 
-    public BigDecimal getClientAccountBalance(long clientId, long accountNumber) throws AccountException {
+    public BigDecimal getClientAccountBalance(long clientId, long accountNumber) throws AccountException, IOException, AccountRepositoryException {
         if (repository.getAllAccountsByClientId(clientId).contains(accountNumber)) {
             return repository.getAccountBalance(accountNumber);
         }
