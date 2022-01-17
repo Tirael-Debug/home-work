@@ -9,7 +9,7 @@ public interface AccountRepository {
 
     Set<Long> getAllAccountsByClientId(long clientId) throws IOException, AccountRepositoryException;
 
-    long getContactByClientId(long clientId);
+    long getContactByClientId(long clientId) throws AccountRepositoryException;
 
-    BigDecimal getAccountBalance(long accountId);
+    BigDecimal getAccountBalance(long accountId) throws AccountRepositoryException;
 }
