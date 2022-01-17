@@ -2,9 +2,10 @@ package com.sbrf.reboot.collections;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class CollectionsTest {
 
@@ -28,12 +29,17 @@ public class CollectionsTest {
      */
     @Test
     public void addStudentToRating() {
+        //В ArrayList можно вставлять элемент в произвольное место
+        List<String> students = new ArrayList<>();
 
-        List<String> students = null;
+        students.add("Иванов");
+        students.add("Петров");
+        students.add("Сидоров");
 
-        //...
+        students.add(0,"Козлов");
 
         assertEquals(4, students.size());
+        assertEquals("Козлов", students.get(0));
     }
 
     /*
@@ -48,10 +54,8 @@ public class CollectionsTest {
      */
     @Test
     public void addMoneyToBox() {
-
-        List<Integer> moneyBox = null;
-
-        //...
+        // LinkedHashSet здесь поможет как с хранением уникальных элементов, там и с сохранением их порядка
+        Set<Integer> moneyBox = new LinkedHashSet<>(Arrays.asList(11, 15, 1, 22, 17, 6, 13, 9, 99, 3));
 
         assertEquals(10, moneyBox.size());
     }
@@ -71,11 +75,28 @@ public class CollectionsTest {
         class Book {
         }
 
-        List<Book> bookshelf = null;
+        Book book1 = new Book();
+        Book book2 = new Book();
+        Book book3 = new Book();
+        //Здесь также подойдет ArrayList, так как он может принимать null
+        // и можно реализовать взятие книги заменой ее в списке на null, а возврат - помещением обратно
+        List<Book> bookshelf = new ArrayList<>();
 
-        //...
+        bookshelf.add(book1);
+        bookshelf.add(book2);
+        bookshelf.add(book3);
 
         assertEquals(3, bookshelf.size());
+
+        Book reading = bookshelf.get(1);
+        bookshelf.set(1, null);
+
+        assertEquals(reading, book2);
+        assertNull(bookshelf.get(1));
+
+        bookshelf.set(1, book2);
+
+        assertEquals(bookshelf.get(1), book2);
     }
 
 
