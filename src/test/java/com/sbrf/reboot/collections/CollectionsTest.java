@@ -29,14 +29,19 @@ public class CollectionsTest {
      */
     @Test
     public void addStudentToRating() {
-        //В ArrayList можно вставлять элемент в произвольное место
-        List<String> students = new ArrayList<>();
+        //LinkedList лучше использовать для вставок элементов в произвольное место
+        List<String> students = new LinkedList<>();
 
         students.add("Иванов");
         students.add("Петров");
         students.add("Сидоров");
 
-        students.add(0,"Козлов");
+        /*К сожалению addFirst работает, только при объявлении списка без интерфейса:
+        LinkedList<String> students = new LinkedList<>();
+        ...
+        students.addFirst("Козлов");*/
+
+        students.add(0, "Козлов");
 
         assertEquals(4, students.size());
         assertEquals("Козлов", students.get(0));
