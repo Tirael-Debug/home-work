@@ -59,8 +59,8 @@ public class CollectionsTest {
      */
     @Test
     public void addMoneyToBox() {
-        // LinkedHashSet здесь поможет как с хранением уникальных элементов, там и с сохранением их порядка
-        Set<Integer> moneyBox = new LinkedHashSet<>(Arrays.asList(11, 15, 1, 22, 17, 6, 13, 9, 99, 3));
+        // HashSet поддерживает хранение уникальных элементов без сохранения порядка вставок
+        Set<Integer> moneyBox = new HashSet<>(Arrays.asList(11, 15, 1, 22, 17, 6, 13, 9, 99, 3));
 
         assertEquals(10, moneyBox.size());
     }
