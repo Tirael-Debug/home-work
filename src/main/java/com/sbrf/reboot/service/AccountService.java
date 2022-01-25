@@ -15,7 +15,7 @@ public class AccountService {
     @Getter
     private final AccountRepository repository;
 
-    public boolean isClientHasContract(long clientId, long contractNumber) {
+    public boolean isClientHasContract(long clientId, long contractNumber) throws AccountRepositoryException {
         return repository.getContactByClientId(clientId) == contractNumber;
     }
 
