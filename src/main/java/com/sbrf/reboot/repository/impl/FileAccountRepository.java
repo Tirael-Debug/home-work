@@ -45,14 +45,13 @@ public class FileAccountRepository implements AccountRepository {
         }
     }
 
-    //TODO реализация, чтобы на данный момент разрешить конфликт с ДЗ 3
     @Override
-    public long getContactByClientId(long clientId) {
-        return 0;
+    public long getContactByClientId(long clientId) throws AccountRepositoryException {
+        throw new AccountRepositoryException("Not implemented!");
     }
 
     @Override
-    public BigDecimal getAccountBalance(long accountId) {
-        return null;
+    public BigDecimal getAccountBalance(long accountId) throws AccountRepositoryException {
+        throw new AccountRepositoryException("Not implemented!");
     }
 }
