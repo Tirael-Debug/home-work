@@ -73,10 +73,10 @@ public class CustomerH2Repository implements CustomerRepository {
     @Override
     public boolean createCustomer(String name, String eMail) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement stmt = connection.prepareStatement("INSERT INTO CUSTOMER(NAME, EMAIL) VALUES(?, ?)")) {
-            stmt.setString(1, name);
-            stmt.setString(2, eMail);
-            int affected = stmt.executeUpdate();
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO CUSTOMER(NAME, EMAIL) VALUES(?, ?)")) {
+            statement.setString(1, name);
+            statement.setString(2, eMail);
+            int affected = statement.executeUpdate();
             return affected > 0;
         }
     }
