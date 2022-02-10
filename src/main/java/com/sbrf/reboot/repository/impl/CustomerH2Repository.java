@@ -23,7 +23,7 @@ public class CustomerH2Repository implements CustomerRepository {
 
     public CustomerH2Repository() {
         initDatasource();
-        createTableIfNotExists();
+        initTable();
     }
 
     private void initDatasource() {
@@ -36,20 +36,16 @@ public class CustomerH2Repository implements CustomerRepository {
     }
 
     @SneakyThrows
-    void createTableIfNotExists() {
+    void initTable() {
         try (Connection connection = dataSource.getConnection()) {
             connection.setAutoCommit(false);
             Statement statement = connection.createStatement();
-            statement.execute("CREATE TABLE IF NOT EXISTS `CUSTOMER` (" +
-                    "`ID` INT PRIMARY KEY AUTO_INCREMENT, " +
-                    "`NAME` VARCHAR(255) NOT NULL, " +
-                    "`EMAIL` VARCHAR(255))");
+            statement.execute("CREATE TABLE IF NOT EXISTS CUSTOMER (" +
+                    "ID INT PRIMARY KEY AUTO_INCREMENT, " +
+                    "NAME VARCHAR(255) NOT NULL, " +
+                    "EMAIL VARCHAR(255))");
             statement.executeBatch();
             connection.commit();
-        } catch (BatchUpdateException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
