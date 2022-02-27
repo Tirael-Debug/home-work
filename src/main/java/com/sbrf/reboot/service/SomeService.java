@@ -16,12 +16,13 @@ public class SomeService {
         final Duration timeout = Duration.ofSeconds(5);
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
-        final Future<String> handler = executor.submit(new Callable() {
+        final Future handler = executor.submit(new Callable() {
             @Override
             public String call() throws Exception {
 
                 // Реализуйте отправку отчета используя CompletableFuture
-                String reportResult = reportService.sendReport("Отправляю отчет");
+                CompletableFuture<String> reportResult = CompletableFuture.supplyAsync(() ->
+                        reportService.sendReport("Отправляю отчет"));
 
                 //какой то код..
                 Thread.sleep(Duration.ofSeconds(3).toMillis());
