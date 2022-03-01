@@ -37,9 +37,9 @@ public class CustomerH2Repository implements CustomerRepository {
 
     @SneakyThrows
     void initTable() {
-        try (Connection connection = dataSource.getConnection()) {
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement()) {
             connection.setAutoCommit(false);
-            Statement statement = connection.createStatement();
             statement.execute("CREATE TABLE IF NOT EXISTS CUSTOMER (" +
                     "ID INT PRIMARY KEY AUTO_INCREMENT, " +
                     "NAME VARCHAR(255) NOT NULL, " +
